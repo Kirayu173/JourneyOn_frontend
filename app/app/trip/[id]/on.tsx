@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/Button';
 import ConfirmModal from '@/components/ui/ConfirmModal';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useTripStore } from '@/hooks/useTripStore';
+import { MapPlaceholder } from '@/components/ui/MapPlaceholder';
+import { Layout as L } from '@/constants/layout';
 
 export default function OnTripScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -26,17 +28,17 @@ export default function OnTripScreen() {
 
   return (
     <Animated.ScrollView contentContainerStyle={styles.container} style={{ opacity: fade }}>
-      <Card title="当日日程">
+      <Card title="今日行程">
         <ThemedText>09:00 早餐 · 10:30 神社参观 · 14:00 美术馆</ThemedText>
       </Card>
+      <Card title="实时地图">
+        <MapPlaceholder />
+      </Card>
       <Card title="附近推荐">
-        <ThemedText>拉面 · 咖啡 · 甜品 · 打卡点</ThemedText>
+        <ThemedText>餐饮 · 咖啡 · 景点 · 打卡</ThemedText>
       </Card>
-      <Card title="告警通知">
-        <ThemedText>暂无延误或天气预警</ThemedText>
-      </Card>
-      <Card title="离线地图">
-        <ThemedText>示意卡片（可接入地图 SDK）</ThemedText>
+      <Card title="提醒与天气">
+        <ThemedText>暂无延误 · 天气良好</ThemedText>
       </Card>
       {trip && !trip.archived && trip.stage !== 'post' && (
         <Button title="进入 回顾 阶段" onPress={() => setAsk(true)} />
@@ -57,6 +59,5 @@ export default function OnTripScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { padding: 16, gap: 12 },
+  container: { padding: L.screenPadding, gap: L.cardGap },
 });
-

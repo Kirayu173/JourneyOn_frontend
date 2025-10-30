@@ -13,7 +13,6 @@ export default function TabsLayout() {
         headerShown: false,
         tabBarActiveTintColor: theme.tint,
         tabBarStyle: { backgroundColor: '#0e1117', borderTopColor: '#2a2f3a' },
-        sceneContainerStyle: { backgroundColor: '#0e1117' },
       }}
     >
       <Tabs.Screen

@@ -72,8 +72,16 @@ export const useTripStore = create<TripStore>((set, get) => ({
     { id: 't2', title: '预订机票', description: '对比价格选择直飞', done: true },
     { id: 't3', title: '打包行李', description: '带好转换插头与雨具', done: false },
   ],
-  getTripTitle: (id) => get().trips.find((t) => t.id === String(id))?.title,
-  getTripById: (id) => get().trips.find((t) => t.id === String(id)),
+  getTripTitle: (id) => {
+    const key = Array.isArray(id) ? id[0] : id;
+    if (!key) return undefined;
+    return get().trips.find((t) => t.id === String(key))?.title;
+  },
+  getTripById: (id) => {
+    const key = Array.isArray(id) ? id[0] : id;
+    if (!key) return undefined;
+    return get().trips.find((t) => t.id === String(key));
+  },
   toggleTask: (id) =>
     set((s) => ({
       preTripTasks: s.preTripTasks.map((t) => (t.id === id ? { ...t, done: !t.done } : t)),

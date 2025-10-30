@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { Link, useRouter } from 'expo-router';
 import { useAuthStore } from '@/hooks/useAuthStore';
+import { Layout as L } from '@/constants/layout';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -35,7 +36,7 @@ export default function Login() {
         <Input value={password} onChangeText={setPassword} placeholder="••••••••" secureTextEntry />
       </View>
       <Button title={loading ? '登录中…' : '登录'} onPress={onSubmit} />
-      <View style={{ height: 12 }} />
+      <View style={{ height: L.cardGap }} />
       <Link href="/(auth)/register" asChild>
         <TouchableOpacity>
           <ThemedText>没有账号？去注册</ThemedText>
@@ -46,10 +47,10 @@ export default function Login() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 24, gap: 16, justifyContent: 'center', alignItems: 'center' },
+  container: { flex: 1, padding: L.screenPadding, gap: L.cardGap, justifyContent: 'center', alignItems: 'center' },
   brand: { alignItems: 'center', marginBottom: 8 },
   brandTitle: { textAlign: 'center', letterSpacing: 1, fontSize: 32 },
   brandSub: { opacity: 0.7, textAlign: 'center', marginTop: 4 },
-  group: { gap: 6, width: '100%', maxWidth: 460 },
+  group: { gap: L.cardGap, width: '100%', maxWidth: 460 },
   label: { opacity: 0.9 },
 });

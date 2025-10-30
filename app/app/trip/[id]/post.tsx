@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/Button';
 import ConfirmModal from '@/components/ui/ConfirmModal';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useTripStore } from '@/hooks/useTripStore';
+import { MapPlaceholder } from '@/components/ui/MapPlaceholder';
+import { Layout as L } from '@/constants/layout';
 
 export default function PostTripScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -20,8 +22,11 @@ export default function PostTripScreen() {
 
   return (
     <Animated.ScrollView contentContainerStyle={styles.container} style={{ opacity: fade }}>
-      <Card title="旅行总结报告">
+      <Card title="旅行总结">
         <ThemedText>本次旅行 5 天 · 步数 58,000 · 打卡 12 个景点</ThemedText>
+      </Card>
+      <Card title="实时地图">
+        <MapPlaceholder />
       </Card>
       <Card title="回忆相册">
         <ThemedText>图片缩略图占位</ThemedText>
@@ -51,6 +56,5 @@ export default function PostTripScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { padding: 16, gap: 12 },
+  container: { padding: L.screenPadding, gap: L.cardGap },
 });
-

@@ -8,6 +8,8 @@ import ConfirmModal from '@/components/ui/ConfirmModal';
 import TaskModal from '@/components/ui/TaskModal';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { MapPlaceholder } from '@/components/ui/MapPlaceholder';
+import { Layout as L } from '@/constants/layout';
 
 const isFabric = (global as any)?.nativeFabricUIManager != null;
 if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental && !isFabric) {
@@ -49,9 +51,13 @@ export default function PreTripScreen() {
         <ThemedText style={{ opacity: 0.8 }}>{trip.startDate} · {trip.durationDays}天 · 预算 ¥{trip.budget}{trip.theme ? ` · ${trip.theme}` : ''}</ThemedText>
       </Card>
 
-      <Card title="行程规划草案">
-        <ThemedText>Day 1: 抵达与美食探索</ThemedText>
-        <ThemedText>Day 2: 文化与自然景点</ThemedText>
+      <Card title="实时地图">
+        <MapPlaceholder />
+      </Card>
+
+      <Card title="行程规划">
+        <ThemedText>Day 1 · 抵达与美食探索</ThemedText>
+        <ThemedText>Day 2 · 文化与自然景点</ThemedText>
       </Card>
 
       <Card>
@@ -85,8 +91,8 @@ export default function PreTripScreen() {
         </View>
       </Card>
 
-      <Card title="天气与提醒">
-        <ThemedText>预计多云 12-18℃ · 建议携带外套与雨具</ThemedText>
+      <Card title="提醒与天气">
+        <ThemedText>预计多云 12–18℃ · 建议外套与雨具</ThemedText>
       </Card>
 
       {!locked && (
@@ -123,7 +129,7 @@ export default function PreTripScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { padding: 16, gap: 12 },
+  container: { padding: L.screenPadding, gap: L.cardGap },
   taskHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 },
   taskListContainer: { gap: 8 },
   addBtn: { backgroundColor: '#22c55e', paddingHorizontal: 10, paddingVertical: 6, borderRadius: 8 },
@@ -134,4 +140,3 @@ const styles = StyleSheet.create({
   todoText: {},
   todoTextDone: { textDecorationLine: 'line-through' },
 });
-
